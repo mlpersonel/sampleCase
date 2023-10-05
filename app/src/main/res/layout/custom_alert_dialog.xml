@@ -1,0 +1,42 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:orientation="vertical"
+    android:padding="@dimen/dialog_ll_pad">
+
+    <TextView
+        android:id="@+id/dialogTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingBottom="@dimen/dialog_tv_marginbottom"
+        android:text="@string/the_trip_you_selected_is_full"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/dialog_textsize"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/dialogMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingBottom="@dimen/dialog_tv_padB"
+        android:text="@string/please_select_another_one"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/dialog_tv_textsize" />
+
+    <Button
+        android:id="@+id/selectTripButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginHorizontal="@dimen/dialog_button_margH"
+        android:layout_marginTop="@dimen/dialog_btn_margT"
+        android:layout_marginBottom="@dimen/dialog_btn_margB"
+        android:height="@dimen/dialog_btn_height"
+        android:backgroundTint="@color/colorPrimary"
+        android:text="@string/select_a_trip"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/dialog_btn_textsize" />
+</LinearLayout>

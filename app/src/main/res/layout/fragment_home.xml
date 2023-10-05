@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<fragment xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/map"
+    android:name="com.google.android.gms.maps.SupportMapFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".BaseActivity">
+
+    <LinearLayout
+        android:id="@+id/bottomSheet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:orientation="vertical"
+        android:padding="@dimen/ll_padding"
+        android:visibility="gone">
+
+        <Button
+            android:id="@+id/markerButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:height="@dimen/btn_height"
+            android:backgroundTint="@color/colorPrimary"
+            android:onClick="onMarkerButtonClick"
+            android:text="@string/list_book"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/btn_textsize" />
+    </LinearLayout>
+</fragment>

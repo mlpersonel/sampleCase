@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="dividerHeight">1</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="rv_padding">8dp</dimen>
+    <dimen name="rv_divider_height">10dp</dimen>
+    <dimen name="rv_marginTop">56dp</dimen>
+    <dimen name="ll_padding">16dp</dimen>
+    <dimen name="btn_height">60dp</dimen>
+    <dimen name="btn_textsize">24sp</dimen>
+    <dimen name="dialog_textsize">20sp</dimen>
+    <dimen name="dialog_tv_marginbottom">16dp</dimen>
+    <dimen name="dialog_tv_textsize">16sp</dimen>
+    <dimen name="dialog_button_margH">20dp</dimen>
+    <dimen name="dialog_btn_margT">10dp</dimen>
+    <dimen name="dialog_btn_margB">10dp</dimen>
+    <dimen name="dialog_btn_height">60dp</dimen>
+    <dimen name="dialog_btn_textsize">20sp</dimen>
+    <dimen name="dialog_tv_padB">16dp</dimen>
+    <dimen name="dialog_ll_pad">16dp</dimen>
+</resources>
