@@ -17,7 +17,7 @@
         android:visibility="gone">
 
         <Button
-            android:id="@+id/markerButton"
+            android:id="@+id/btnBook"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:height="@dimen/btn_height"

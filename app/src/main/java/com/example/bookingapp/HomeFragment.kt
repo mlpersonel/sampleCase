@@ -1,19 +1,19 @@
 package com.example.bookingapp
 
-import android.content.Context
-import com.example.bookingapp.models.Station
 import android.graphics.BitmapFactory
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.bookingapp.databinding.FragmentHomeBinding
+import com.example.bookingapp.events.BookEvent
+import com.example.bookingapp.models.Station
 import com.example.bookingapp.services.ApiClient
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -24,6 +24,9 @@ import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -35,7 +38,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
     private lateinit var bottomSheet: LinearLayout
-    private lateinit var markerButton: Button
+    private lateinit var btnBook: Button
     private var visibleMarker: Marker? = null
 
     private val binding get() = _binding!!
@@ -46,26 +49,22 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        if (args.station != null) {
-            visibleMarker?.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.completed))
-        }
-
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as? SupportMapFragment
         mapFragment?.getMapAsync(this)
 
         bottomSheet = binding.bottomSheet
-        markerButton = binding.markerButton
+        btnBook = binding.btnBook
 
         fetchAllStationsRequest()
 
         return binding.root
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onBookEvent(event: BookEvent?) {
+        visibleMarker?.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.completed))
     }
 
     private fun fetchAllStationsRequest() {
@@ -162,7 +161,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         if (visibleMarker != null && visibleMarker != marker) {
             hideBottomSheet()
         }
-        markerButton.setOnClickListener {
+        btnBook.setOnClickListener {
             val selectedStation = marker.tag as Station
             val action = HomeFragmentDirections.actionFirstFragmentToSecondFragment(selectedStation)
             findNavController().navigate(action)
@@ -183,6 +182,25 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
                     addStationMarker(station)
                 }
             }
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        if (!EventBus.getDefault().isRegistered(this)){
+            EventBus.getDefault().register(this);
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if (EventBus.getDefault().isRegistered(this)){
+            EventBus.getDefault().unregister(this);
         }
     }
 }
